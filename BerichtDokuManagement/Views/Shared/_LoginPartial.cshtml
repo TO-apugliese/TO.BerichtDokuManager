@@ -1,0 +1,20 @@
+﻿@using BerichtDokuManagement.Moduls
+@{
+    var CurrentUser = SessionManager.GetSessionUser();
+    if (CurrentUser != null)
+    {
+        <text>
+            Hallo @CurrentUser.Username ! <a id="Userprofilename" href="#"><span class="icon-settings"></span></a>
+            @using (Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+                @Html.AntiForgeryToken()
+                <a href="javascript:document.getElementById('logoutForm').submit()">Logout <span class="icon-exit"></span></a>
+            }
+        </text>
+    } else {
+        <ul>
+            <li>@Html.ActionLink("Azubi Registrierung", "RegisterAzubi", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) <span class="icon-pen">&nbsp;&nbsp;&nbsp;oder </span></li>
+            <li>@Html.ActionLink("Teamleiter Registrierung", "RegisterTeamleiter", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) <span class="icon-pen">&nbsp;&nbsp;&nbsp;|&nbsp;</span></li>
+            <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) <span class="icon-enter"></span></li>
+        </ul>
+    }
+}

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="BerichtDokuManagement.Models.Template.pdfTemplateInfo">
+    <Position X="13" Y="4.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>IAAEgAAQBAAAAAAAgAAAAgAgEAgACAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\Template\pdfTemplateInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Moduls.AccountManager">
+    <Position X="7" Y="6.75" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAABCAAgAAAAAAAAAAAAAAAAAAAAQxBAAAAA=</HashCode>
+      <FileName>Moduls\AccountManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Moduls.DBManager">
+    <Position X="16.75" Y="4.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAQAAAQEAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Moduls\DBManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Moduls.FileManager">
+    <Position X="12.75" Y="7.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAEA=</HashCode>
+      <FileName>Moduls\FileManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Moduls.MailManager">
+    <Position X="7" Y="4.25" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAIEAAAAAAAAAAAAAAQABAAAAAAAAA=</HashCode>
+      <FileName>Moduls\MailManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Moduls.PDFManager">
+    <Position X="7" Y="2" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAQABAAAAAAAQA=</HashCode>
+      <FileName>Moduls\PDFManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Moduls.SessionManager">
+    <Position X="16" Y="2" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAEAAAAAABAAAAAAAAAAAAEAAQIAAAAAAAAAAAA=</HashCode>
+      <FileName>Moduls\SessionManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Models.MailInfo">
+    <Position X="12.5" Y="2" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAASAAAAAAQA=</HashCode>
+      <FileName>Models\Template\MailTemplateInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,101 @@
+﻿@model BerichtDokuManagement.Models.WeekReport
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Title </h1>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(x => x.UserID)
+    
+    <fieldset>
+        <legend>Wochenbericht</legend>
+        <div class="formItem formTextBoxBlock">
+            <span class="formItemTitle">Abteilung</span>
+            <br />
+            @Html.EditorFor(model => model.Department)
+            @Html.ValidationMessageFor(model => model.Department)
+        </div>
+        <div class="formItem formTextBoxBlock">
+            <span class="formItemTitle">Ausbildungswoche</span>
+            <br />
+            @Html.EditorFor(model => model.TrainingWeek)
+            @Html.ValidationMessageFor(model => model.TrainingWeek)
+        </div>
+        <div class="formItem formTextBoxBlock">
+            <span class="formItemTitle">Anfangsdatum</span>
+            <br />
+            @Html.EditorFor(model => model.BeginDate)
+            @Html.ValidationMessageFor(model => model.BeginDate)
+        </div>
+        <div class="formItem formTextBoxBlock">
+            <span class="formItemTitle">Enddatum</span>
+            <br />
+            @Html.EditorFor(model => model.EndDate)
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </div>
+        <div class="clearfix"></div>
+        <div class="formItem">
+            <span class="formItemTitle">Tätigkeiten im Betrieb</span>
+            <br />
+            @Html.Label("Anzahl der Stunden", new { @class = "hoursLabel" })
+            @Html.TextBoxFor(model => model.CompanyActivityHours, new { @class = "hourField" })
+            @Html.ValidationMessageFor(model => model.CompanyActivityHours)
+            <br />
+            @Html.TextAreaFor(model => model.CompanyActivity, new { @class = "texteditor" })
+            @Html.ValidationMessageFor(model => model.CompanyActivity)
+        </div>
+        <div class="formItem">
+            <span class="formItemTitle">Unterweisungen im Betrieb</span>
+            <br />
+            @Html.Label("Anzahl der Stunden", new { @class = "hoursLabel" })
+            @Html.TextBoxFor(model => model.CompanyEducationHours, new { @class = "hourField" })
+            @Html.ValidationMessageFor(model => model.CompanyEducationHours)
+            <br />
+            @Html.TextAreaFor(model => model.CompanyEducation, new { @class = "texteditor" })
+            @Html.ValidationMessageFor(model => model.CompanyEducation)
+        </div>
+        <div class="formItem">
+            <span class="formItemTitle">Themen des Schulunterrichts</span>
+            <br />
+            @Html.Label("Anzahl der Stunden", new { @class = "hoursLabel" })
+            @Html.TextBoxFor(model => model.SchoolEducationHours, new { @class = "hourField" })
+            @Html.ValidationMessageFor(model => model.SchoolEducationHours)
+            <br />
+            @Html.TextAreaFor(model => model.SchoolEducation, new { @class = "texteditor" })
+            @Html.ValidationMessageFor(model => model.SchoolEducation)
+        </div>
+        <div>
+            @Html.HiddenFor(x => x.hasPassing)
+            @Html.HiddenFor(model => model.MonthReportID)
+            @Html.HiddenFor(x => x.CompanyActivityEvaluation)
+            @Html.HiddenFor(x => x.CompanyEducationEvaluation)
+            @Html.HiddenFor(x => x.SchoolEducationEvaluation)
+        </div>
+            <p>
+                <input type="submit" value="erstellen" />
+                <input type="button" value="abbrechen" onclick="window.location='/Month/Open/' + @Model.MonthReportID;" />
+            </p>
+</fieldset>
+}
+
+@section Scripts {
+    <link href="~/Scripts/jquery.cleditor.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.cleditor.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/myScripts.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".texteditor").cleditor(
+                {
+                    width: 510,
+                    height: 250
+                });
+        });
+    </script>
+}

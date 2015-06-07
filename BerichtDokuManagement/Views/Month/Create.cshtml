@@ -1,0 +1,43 @@
+﻿@model BerichtDokuManagement.Models.MonthReport
+
+@{
+    ViewBag.Title = "Du erstellst einen Monatsbericht";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Title</h1>
+<br />
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Monatsbericht</legend>
+
+        @Html.HiddenFor(x => x.UserID)
+        @Html.HiddenFor(x => x.Status)
+
+        <div class="editor-label">
+            Jahr
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewBag.JahresListe)
+            @Html.ValidationMessageFor(model => model.ReportDate.Year)
+        </div>
+
+        <div class="editor-label">
+            Monat
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Month", (IEnumerable<SelectListItem>)ViewBag.MonatsListe)
+            @Html.ValidationMessageFor(model => model.ReportDate.Month)
+        </div>
+        <p>
+            <input type="submit" value="erstellen" />
+            <input type="button" value="abbrechen" onclick="window.location = '/Month/AllMonths';" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,110 @@
+﻿@using BerichtDokuManagement.Models;
+@using BerichtDokuManagement.Moduls;
+@model BerichtDokuManagement.Models.MonthReport
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Title</h1>
+@if (ViewBag.isAzubi && Model.Status == "abgegeben")
+{
+    <p>Dieser Bericht liegt momentan deinem Vorgesetzen vor.</p>
+}
+else
+{
+     <fieldset id="MonthItem">
+        <legend>MonthReport</legend>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Jahr</th>
+                    <th>Monat</th>
+                    <th>Status</th>
+                    <th>Letzte Änderung</th>
+                </tr>
+                <tr>
+                    <td>@Model.ReportDate.Year</td>
+                    <td>@ViewBag.MonthName</td>
+                    <td class="@Model.Status">@Model.Status</td>
+                    <td>@Model.LastChanges.ToShortDateString() / @Model.LastChanges.ToShortTimeString() Uhr</td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    if (ViewBag.isAzubi)
+    {
+        <p>
+            @Html.ActionLink("Daten bearbeiten", "Edit", new { id = Model.ID }) <span class="icon-pencil"></span>
+            @Html.ActionLink("Neuer Wochenbericht", "Create", "Week", new { id = Model.ID }, false)  <span class="icon-plus"></span>&nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("zurück zur Liste", "AllMonths") &nbsp;<span class="icon-reply"> </span>&nbsp;&nbsp;&nbsp;
+        </p>
+    }
+
+
+    if (ViewBag.hasPrintedPdf && ViewBag.isAzubi)
+    {
+        <div id="ListOfPdfs">
+            <h2>Liste erzeugter Pdf's</h2>
+            <ul>
+                @{
+                    if (ViewBag.hasPrintedPdf)
+                    {
+                        foreach (var item in Model.ListOfWeekReports)
+                        {
+                            if (item.CreatedPdf.DownloadUrl != "")
+                            {
+                                <li>
+                                    <span class="icon-file-pdf"></span><a target="_blank" href="@item.CreatedPdf.DownloadUrl" alt"pdfdownload">Download von Pdf Woche @item.TrainingWeek im @ViewBag.Month</a>
+                                </li>
+                            }
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    }
+    
+
+    <div id="WeekItemList">
+        @{ 
+            foreach (var WeekReport in Model.ListOfWeekReports)
+            {
+                Html.RenderPartial("_WeekReport", WeekReport);
+            }        
+        }
+    </div>
+
+    <p id="footerNav">
+        @if (ViewBag.isAzubi && Model.Status == "freigabe")
+        {
+            if (Model.ListOfWeekReports.Count > 0)
+            {
+                if (!(ViewBag.hasPrintedPdf))
+                {
+                    @Html.ActionLink("drucken", "Print", new { id = Model.ID }, false); <span class="icon-printer"></span>
+                }
+            }
+
+        }
+        @if (ViewBag.hasTeamleiter && Model.ListOfWeekReports.Count > 0)
+        {
+            if (ViewBag.isAzubi)
+            {
+                if (Model.ListOfWeekReports.Any(x => x.hasPassing == false))
+                {
+                    @Html.ActionLink("Diesen Monat abgeben", "Delivery", new { id = Model.ID, userRole = ViewBag.userRole }, false) <span class="icon-paperplane"></span>
+                }
+            }
+            else
+            {
+                @Html.ActionLink("zurück an den Azubi senden", "Delivery", new { id = Model.ID, userRole = ViewBag.userRole }, false) <span class="icon-paperplane"></span>
+            }
+            
+        }
+    </p>
+}
+
+@section Scripts {
+    <script src="~/Scripts/myScripts.js"></script>
+}

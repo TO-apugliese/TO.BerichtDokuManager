@@ -1,0 +1,156 @@
+﻿@using BerichtDokuManagement.Moduls
+@model BerichtDokuManagement.Models.WeekReport
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Title</h1>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Wochenbericht</legend>
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(x => x.MonthReportID)
+        @Html.Hidden("referent", (object)ViewBag.Referent, null)
+        @Html.HiddenFor(x => x.isProceed)
+
+        <div class="formItem formTextBoxBlock">
+            <span class="formItemTitle">Abteilung</span>
+            <br />
+            @Html.EditorFor(model => model.Department, ViewBag.Disabled ? (object)new { disabled = "disabled" } : new { })
+            @Html.ValidationMessageFor(model => model.Department)
+        </div>
+        <div class="formItem formTextBoxBlock">
+            <span class="formItemTitle">Ausbildungswoche</span>
+            <br />
+            @Html.EditorFor(model => model.TrainingWeek, ViewBag.Disabled ? (object)new { disabled = "disabled" } : new { })
+            @Html.ValidationMessageFor(model => model.TrainingWeek)
+        </div>
+        <div class="formItem formTextBoxBlock">
+            <span class="formItemTitle">Anfangsdatum</span>
+            <br />
+            @Html.EditorFor(model => model.BeginDate, ViewBag.Disabled ? (object)new { disabled = "disabled" } : new { })
+            @Html.ValidationMessageFor(model => model.BeginDate)
+        </div>
+        <div class="formItem formTextBoxBlock">
+            <span class="formItemTitle">Enddatum</span>
+            <br />
+            @Html.EditorFor(model => model.EndDate, ViewBag.Disabled ? (object)new { disabled = "disabled" } : new { })
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </div>
+        <div class="clearfix"></div>
+        <div class="formItem formEditorBlock">
+            <span class="formItemTitle">Tätigkeiten im Betrieb</span>
+            <br />
+            @Html.Label("Anzahl der Stunden", new { @class = "hoursLabel" })
+            @Html.TextBoxFor(model => model.CompanyActivityHours, new { @class = "hourField" })
+            @Html.ValidationMessageFor(model => model.CompanyActivityHours)
+            <br />
+            <div>
+                @Html.TextAreaFor(model => model.CompanyActivity, !(ViewBag.isAzubi) ? (object)new { disabled = "disabled", @class = "texteditorDisabled" } : new { @class = "texteditorEnabled" })
+                @Html.ValidationMessageFor(model => model.CompanyActivity)
+            </div>
+            <div>
+                @Html.TextAreaFor(model => model.CompanyActivityEvaluation, !(ViewBag.isAzubi) ? (object)new { disabled = "disabled", @class = "texteditorEnabled" } : new { @class = "texteditorDisabled" })
+                @Html.ValidationMessageFor(model => model.CompanyActivityEvaluation)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="formItem formEditorBlock">
+            <span class="formItemTitle">Unterweisungen im Betrieb</span>
+            <br />
+            @Html.Label("Anzahl der Stunden", new { @class = "hoursLabel" })
+            @Html.TextBoxFor(model => model.CompanyEducationHours, new { @class = "hourField" })
+            @Html.ValidationMessageFor(model => model.CompanyEducationHours)
+            <br />
+            <div>
+                @Html.TextAreaFor(model => model.CompanyEducation, !(ViewBag.isAzubi) ? (object)new { disabled = "disabled", @class = "texteditorDisabled" } : new { @class = "texteditorEnabled" })
+                @Html.ValidationMessageFor(model => model.CompanyEducation)
+            </div>
+            <div>
+                @Html.TextAreaFor(model => model.CompanyEducationEvaluation, !(ViewBag.isAzubi) ? (object)new { disabled = "disabled", @class = "texteditorEnabled" } : new { @class = "texteditorDisabled" })
+                @Html.ValidationMessageFor(model => model.CompanyEducationEvaluation)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="formItem formEditorBlock">
+            <span class="formItemTitle">Themen des Schulunterrichts</span>
+            <br />
+            @Html.Label("Anzahl der Stunden", new { @class = "hoursLabel" })
+            @Html.TextBoxFor(model => model.SchoolEducationHours, new { @class = "hourField" })
+            @Html.ValidationMessageFor(model => model.SchoolEducationHours)
+            <br />
+             <div>
+                @Html.TextAreaFor(model => model.SchoolEducation, !(ViewBag.isAzubi) ? (object)new { disabled = "disabled", @class = "texteditorDisabled" } : new { @class = "texteditorEnabled" })
+                @Html.ValidationMessageFor(model => model.SchoolEducation)
+            </div>
+            <div>
+                @Html.TextAreaFor(model => model.SchoolEducationEvaluation, !(ViewBag.isAzubi) ? (object)new { disabled = "disabled", @class = "texteditorEnabled" } : new { @class = "texteditorDisabled" })
+                @Html.ValidationMessageFor(model => model.SchoolEducationEvaluation)
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="formItem">
+            @if (ViewBag.Disabled)
+            {
+                @Html.CheckBoxFor(x => x.hasPassing)
+                @Html.LabelFor(model => model.hasPassing)
+            }
+        </div>
+        <p>
+            <input type="submit" value="speichern" />
+            <input type="button" value="abbrechen" onclick="window.location=@((ViewBag.Referent == "Month") ? "'/Month/Open/" + @Model.MonthReportID + "'" : "'/Week'")" />
+        </p>
+
+    </fieldset>
+}
+
+@section Scripts {
+    <link href="~/Scripts/jquery.cleditor.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.cleditor.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/myScripts.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var isMobile;
+            var windowWidth;
+            bindEditor();
+            setEditorWith();
+
+            $(window).resize(function(){
+                setEditorWith();
+            });
+
+            function setEditorWith() {
+                windowWidth = $(window).width();
+                isMobile = windowWidth <= 768;
+                
+                if (isMobile) {
+                    $('.cleditorMain').css('width', windowWidth * 0.95 );
+                }
+                else{
+                    $('.cleditorMain').css('width', '510' );
+                }
+            }
+
+            function bindEditor(){
+                var disabledEditors = $(".texteditorDisabled").cleditor({ width: (isMobile ? windowWidth * 0.95 : 510), height: 250 });
+                $.each(disabledEditors, function (index) {
+                    disabledEditors[index].disable(true);
+                });
+
+                var enabledEditors = $(".texteditorEnabled").cleditor({ width: (isMobile ? windowWidth * 0.95 : 510), height: 250 });
+                $.each(enabledEditors, function (index) {
+                    enabledEditors[index].disable(false);
+                });
+            }
+        });
+
+    </script>
+}

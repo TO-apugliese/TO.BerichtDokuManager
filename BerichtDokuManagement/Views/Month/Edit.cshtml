@@ -1,0 +1,57 @@
+﻿@model BerichtDokuManagement.Models.MonthReport
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Title</h1>
+<br />
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Monatsbericht</legend>
+
+        @Html.HiddenFor(model => model.ID)
+        @Html.Hidden("MonthNumber")
+        @Html.Hidden("YearNumber")
+
+        <div class="editor-label">
+           Jahr
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewBag.JahresListe)
+            @Html.ValidationMessageFor(model => model.ReportDate.Year)
+        </div>
+
+        <div class="editor-label">
+            Monat
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Month", (IEnumerable<SelectListItem>)ViewBag.MonatsListe)
+            @Html.ValidationMessageFor(model => model.ReportDate.Month)
+        </div>
+
+        <p>
+            <input type="submit" value="speichern" />
+            <input type="button" value="abbrechen" onclick="window.location='/Month/Open/@Model.ID';" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        //Beim speichern den Value auf den Text setzen
+        $(document).ready(function () {
+            $("form").submit(function () {
+                var selMonth = $("#Month option:selected").val();
+                var selYear = $("#Year option:selected").text();
+
+                $("#MonthNumber").val(selMonth);
+                $("#YearNumber").val(selYear);
+            });
+        });
+    </script>
+}

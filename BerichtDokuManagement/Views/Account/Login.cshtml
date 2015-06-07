@@ -1,0 +1,57 @@
+﻿@model BerichtDokuManagement.Models.LoginModel
+
+@{
+    ViewBag.Title = "Anmelden";
+    Layout = "/Views/Shared/_Layout-withoutLogin.cshtml";
+}
+
+<div id="loginForm">
+    <div class="head">
+        <img src="~/content/img/usericon.png" />
+    </div>
+    <hgroup class="title">
+        <h1>@ViewBag.Title.</h1>
+    </hgroup>
+    <h2>Bitte gib deinen Login daten an</h2>
+    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        if (ViewBag.UserNotValidInfo != null)
+        {
+            <p class="info">
+                @ViewBag.UserNotValidInfo
+            </p>
+        }
+
+        <fieldset>
+            <legend>Anmeldeformular</legend>
+            <ol>
+                <li>
+                    @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Benutzername" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </li>
+                <li>
+                    @Html.PasswordFor(m => m.Password, new { @placeholder = "Passwort" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </li>
+            </ol>
+            <div>
+                @Html.ActionLink("Noch kein Account?", "RegisterAzubi", "Account") <br />
+                @Html.ActionLink("Passwort vergessen?", "ResetPassword", "Account")
+            </div>
+            <input type="submit" value="Anmelden" />
+        </fieldset>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $('#loginForm').fadeIn(1800);
+        });
+
+    </script>
+}

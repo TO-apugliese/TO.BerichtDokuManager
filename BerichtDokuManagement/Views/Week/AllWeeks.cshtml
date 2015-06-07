@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BerichtDokuManagement.Models.WeekReport>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Übersicht aller Wochenberichte</h1>
+<br />
+@if (ViewBag.hasWeekReports)
+{
+ <table>
+    <tr>
+        <th>
+            Abteilung
+        </th>
+        <th>
+            Woche
+        </th>
+        <th>
+            Anfangsdatum
+        </th>
+        <th>
+            Enddatum
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrainingWeek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeginDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.ActionLink("bearbeiten", "Edit", new {id = item.ID }) <span class="icon-pencil"></span>
+                @Html.ActionLink("löschen", "Delete", new {id = item.ID }) <span class="icon-trash"></span>
+            </td>
+        </tr>
+    }
+    </table>
+}
+else { 
+    <p>
+        Es sind noch keine Wochenberichte von dir angelegt worden...<br />
+        Leg welche in der @Html.ActionLink("\"Monatsübersicht\"", "AllMonths", "Month") an
+    </p>
+}       

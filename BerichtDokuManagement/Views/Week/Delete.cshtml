@@ -1,0 +1,37 @@
+﻿@model BerichtDokuManagement.Models.WeekReport
+
+@{
+    ViewBag.Title = "Willst du diesen Wochenbericht wirklich löschen?";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>WeekReport</legend>
+
+        @Html.Hidden("referent", (object)ViewBag.Referent, null)
+        @Html.HiddenFor(x => x.MonthReportID)
+
+        <table>
+            <tr>
+                <th>Abteilung</th>
+                <th>Ausbildungswoche</th>
+                <th>Von</th>
+                <th>Bis</th>
+            </tr>
+            <tr>
+                <td>@Html.DisplayFor(model => model.Department)</td>
+                <td>@Html.DisplayFor(model => model.TrainingWeek)</td>
+                <td>@Html.DisplayFor(model => model.BeginDate)</td>
+                <td>@Html.DisplayFor(model => model.EndDate)</td>
+            </tr>
+        </table>
+    </fieldset>
+    <p>
+        <input type="submit" value="löschen" /> 
+        <input type="button" value="abbrechen" onclick="window.location=@((ViewBag.referent == "Month") ? "'/Month/Open/" + @Model.MonthReportID + "'" : "'/Week/AllWeeks'")" />
+    </p>
+}

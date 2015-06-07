@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BerichtDokuManagement.Models.MonthReport>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h1>Übersicht aller Monatsberichte</h1>
+<br />
+
+@if (ViewBag.MonthExist)
+{
+    <table>
+        <tr>
+            <th>
+                Jahr
+            </th>
+            <th>
+                Monat
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+        
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.ReportDate.Year
+                </td>
+                <td>
+                    @item.ReportDate.Month
+                </td>
+                <td class="@item.Status">
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                @if (item.Status != "abgegeben")
+                {
+                    @Html.ActionLink("Öffnen", "Open", new { id=item.ID }) <span class="icon-arrow-right"></span>
+                    @Html.ActionLink("löschen", "Delete", new { id = item.ID })    <span class="icon-trash"></span>
+                }      
+                </td>
+            </tr>
+        }
+    </table>
+}
+<p>
+    @Html.ActionLink("Neuen Monatsbericht erstellen", "Create")
+    <span class="icon-plus"></span>
+</p>

@@ -1,0 +1,54 @@
+﻿@using BerichtDokuManagement.Moduls;
+@model IEnumerable<BerichtDokuManagement.Models.MonthReport>
+
+@{
+    ViewBag.Title = "Abgegebene Monatsberichte";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Title</h1>
+<br />
+
+@if (!ViewBag.AnyReport)
+{
+    <p>
+        Momentan liegen keine Monatsberichte vor.
+    </p>
+}
+else
+{
+    <table>
+        <tr>
+            <th>
+                Jahr
+            </th>
+            <th>
+                Monat
+            </th>
+            <th>Von Wem?</th>
+            <th>Abgegeben am</th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReportDate.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReportDate.Month)
+            </td>
+            <td>
+                @AccountManager.getUserConfig(item.UserID).FirstName
+                @AccountManager.getUserConfig(item.UserID).LastName
+            </td>
+            <td>@item.LastChanges.ToShortDateString() / @item.LastChanges.ToShortTimeString() Uhr</td>
+            <td>
+                @Html.ActionLink("Einsehen und Bewerten", "Open", "Month", new { id = item.ID }, false) 
+            </td>
+        </tr>
+    }
+
+    </table>
+}      
+

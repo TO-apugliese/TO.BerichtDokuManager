@@ -1,0 +1,116 @@
+﻿@model BerichtDokuManagement.Models.UserConfig
+
+@{
+    ViewBag.Title = "Profil Einstellungen";
+    HtmlString info = new HtmlString(ViewBag.SaveConfirmation);
+    Layout = null;
+}
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>@ViewBag.Title</legend>
+
+        @Html.HiddenFor(model => model.ID)
+        <div>Angegebener Vor- und Nachname werden beim erzeugen des Berichtshefts benutzt.</div><br />
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="editor-label">
+                            @if (ViewBag.userRole == @BerichtDokuManagement.Models.Enums.userType.Auszubildender.ToString())
+                            {
+                                <span>Template bitte auswählen</span>
+                            }
+                            else
+                            {
+                                <span>Berechtigungskey</span>
+                            }
+                        </div>
+                            @if (ViewBag.userRole == @BerichtDokuManagement.Models.Enums.userType.Auszubildender.ToString())
+                            {
+                                <div>
+                                    @Html.DropDownList("TemplatePath", (IEnumerable<SelectListItem>)ViewData["TemplateListe"])
+                                    @Html.ValidationMessageFor(model => model.TemplatePath)
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    @Html.TextBox("formAuthKey", (string)ViewBag.currentAuhtKey)
+                                </div>
+                            }
+                        </td>
+                                <td>
+                                    <div class="editor-label">
+                                        Altes Passwort
+                                    </div>
+                                    <div>
+                                        @Html.TextBox("oldPassword")
+                                    </div>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td>
+                                        <div class="editor-label">
+                                            Vorname
+                                        </div>
+                                        <div class="editor-field">
+                                            @Html.EditorFor(model => model.FirstName)
+                                            @Html.ValidationMessageFor(model => model.FirstName)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="editor-label">
+                                            Neues Passwort
+                                        </div>
+                                        <div>
+                                            @Html.TextBox("newPassword")
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="editor-label">
+                                            Nachname
+                                        </div>
+                                        <div class="editor-field">
+                                            @Html.EditorFor(model => model.LastName)
+                                            @Html.ValidationMessageFor(model => model.LastName)
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="editor-label">
+                                            Passwort wiederholen:
+                                        </div>
+                                        <div class="editor-field">
+                                            @Html.TextBox("repeatPassword")
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <p style="float: right">
+                                            <input type="submit" value="speichern" />
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                                <p>
+                                    @if (ViewBag.SaveConfirmation != null)
+            {
+                                        @info
+            }
+                                </p>
+                            </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

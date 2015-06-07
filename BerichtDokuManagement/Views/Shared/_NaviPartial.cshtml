@@ -1,0 +1,24 @@
+﻿@using BerichtDokuManagement.Moduls
+
+@{
+    var CurrentUser = SessionManager.GetSessionUser();
+    if (CurrentUser.UserRole == BerichtDokuManagement.Models.Enums.userType.Auszubildender.ToString())
+    {
+       <nav>
+            <ul id="menu">
+                <li>@Html.ActionLink("Monatsübersicht", "AllMonths", "Month")</li>
+                <li>@Html.ActionLink("Wochenübersicht", "AllWeeks", "Week")</li>
+            </ul>
+        </nav>
+    }
+    else if (CurrentUser.UserRole == BerichtDokuManagement.Models.Enums.userType.Teamleiter.ToString())
+    {
+       <nav>
+            <ul id="menu">
+                <li>@Html.ActionLink("Abgegebene Monatsberichte", "AzubiReports", "TeamLeader")</li>
+                <li>@Html.ActionLink("Meine Azubis", "AzubiList", "TeamLeader")</li>
+                <li>@Html.ActionLink("Neue Auzubis", "NewAzubis", "TeamLeader")</li>
+            </ul>
+        </nav>
+    }
+}

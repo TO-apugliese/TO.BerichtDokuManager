@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="doc-page-size" content="A4" />
+    <meta name="doc-orientation" content="Portrait" />
+    <style>
+        html {
+            font-size: 20px;
+        }
+
+        div { position: absolute; }
+
+        span {
+            float: left;
+        }
+
+        #Head {
+            top: 40mm;
+            border: 1px solid #000;
+            width: 350mm;
+        }
+            #Head #NameTxt {
+                width: 80mm;
+                padding: 3mm;
+            }
+            #Head #NameContent {
+                border-left: 1px solid #000;
+                width: 254mm;
+                padding: 3mm;
+            }
+
+            #Head #YearTxt {
+                width: 80mm;
+                padding: 3mm;
+                border-top: 1px solid #000;
+            }
+            #Head #YearContent {
+                width: 70mm;
+                padding: 3mm;
+                border-top: 1px solid #000;
+                border-left: 1px solid #000;
+            }
+
+            #Head #DepartmentTxt {
+                width: 93mm;
+                padding: 3mm;
+                border-top: 1px solid #000;
+                border-left: 1px solid #000;
+            }
+            #Head #DepartmentContent {
+                width: 82mm;
+                padding: 3mm;
+                border-top: 1px solid #000;
+                border-left: 1px solid #000;
+            }
+
+            #Head #BeginDayTxt {
+                width: 80mm;
+                padding: 3mm;
+                border-top: 1px solid #000;
+            }
+            #Head #BeginDayContent {
+                width: 70mm;
+                padding: 3mm;
+                border-top: 1px solid #000;
+                border-left: 1px solid #000;
+            }
+
+            #Head #EndDayTxt {
+                width: 35mm;
+                padding: 3mm;
+                border-top: 1px solid #000;
+                border-left: 1px solid #000;
+            }
+
+            #Head #EndDayContent {
+                width: 140mm;
+                padding: 3mm;
+                border-top: 1px solid #000;
+                border-left: 1px solid #000;
+            }
+        #Content {
+            width: 350mm;
+            top: 83mm;
+        }
+            #Content #ContentHeadline {
+                width: 312mm;
+                padding: 6mm 0 6mm 3mm;
+                background-color: #aaaaaa;
+                border-left: 1px solid #000;
+                border-top: 1px solid #000;
+            }
+            #Content #hoursHeadline {
+                width: 31mm;
+                padding: 6mm 0 6mm 3mm;
+                background-color: #aaaaaa;
+                border-left: 1px solid #000;
+                border-top: 1px solid #000;
+                border-right: 1px solid #000;
+            }
+            #Content #ContentTxt {
+                width: 312mm;
+                height: 80mm;
+                padding: 6mm 0 6mm 3mm;
+                border-top: 1px solid #000;
+                border-left: 1px solid #000;
+                border-bottom: 1px solid #000;
+            }
+
+            #Content #hours {
+                width: 31mm;
+                height: 80mm;
+                padding: 6mm 0 6mm 3mm;
+                border-left: 1px solid #000;
+                border-top: 1px solid #000;
+                border-right: 1px solid #000;
+                border-bottom: 1px solid #000;
+            }
+
+        #footer {
+            color: #aaaaaa;
+            top: 410mm;
+            width: 350mm;
+            font-size: 20px;
+        }
+            #footer .left {
+                
+            }
+                #footer .left #ConfirmationTxt{
+                    width: 350mm;
+                    font-weight: bold;
+                }
+                #footer .left #FirmAzubi {
+                    margin-top: 22mm;
+                }
+                #footer .left #FirmAzubi span {
+                    border-top: 1px solid #000;
+                    padding-top: 2mm;
+                    width: 110mm;
+                }
+                #footer .left #FirmAdults span {
+                    border-top: 1px solid #000;
+                    padding-top: 2mm;
+                    width: 110mm;
+                    margin-top: 2mm;
+                }
+
+            #footer .right {
+                margin-left: 200mm;
+                margin-top: 25mm;
+            }
+                #footer .right #FirmTrainer {
+                    border-top: 1px solid #000;
+                    padding-top: 2mm;
+                }
+
+                #footer .right #FirmPersonDepartment span {
+                    border-top: 1px solid #000;
+                    padding-top: 2mm;
+                }
+
+                #footer .right #FirmSchool span {
+                    border-top: 1px solid #000;
+                    padding-top: 2mm;
+                }
+    </style>
+</head>
+<body>
+    <img src="[IHKLogoSrc]" />
+    <div id="Head">
+        <span id="NameTxt">Name des/der Auszubildenden</span>
+        <span id="NameContent">[Author]</span>
+        <span id="YearTxt">Ausbildungsjahr</span>
+        <span id="YearContent">[Year]</span>
+        <span id="DepartmentTxt">Ggf. ausbildende Abteilung</span>
+        <span id="DepartmentContent">[Department]</span>
+        <span id="BeginDayTxt">Ausbildungswoche vom:</span>
+        <span id="BeginDayContent">[BeginingDate]</span>
+        <span id="EndDayTxt">Bis:</span>
+        <span id="EndDayContent">[EndDate]</span>
+    </div>
+
+    <div id="Content">
+        <span id="ContentHeadline">Betriebliche Tätigkeiten</span>
+        <span id="hoursHeadline">Stunden</span>
+        <span id="ContentTxt">[CompanyActivity]</span>
+        <span id="hours">[CompanyActivityHours]</span>
+
+        <span id="ContentHeadline">Unterweisungen, betrieblicher Unterricht, sontige Schulungen</span>
+        <span id="hoursHeadline">Stunden</span>
+        <span id="ContentTxt">[CompanyEducation]</span>
+        <span id="hours">[CompanyEducationHours]</span>
+
+        <span id="ContentHeadline">Themen des Berufschulunterrichts</span>
+        <span id="hoursHeadline">Stunden</span>
+        <span id="ContentTxt">[SchoolEducation]</span>
+        <span id="hours">[SchoolEducationHours]</span>
+    </div>
+
+    <div id="footer">
+        <div class="left">
+            <p id="ConfirmationTxt">Durch die nachfolgende Unterschrift wird die Richtigkeit und Vollständigkeit der obigen Angaben bestätigt</p>
+            <p id="FirmAzubi">
+                <span>Datum, Unterschrift Auszubildende/r</span>
+            </p><br />
+            <p id="FirmAdults">
+                Zur Kenntnis genommen:<br />
+               <br /><br /><br />
+                <span>Datum, Unterschrift gesetzlicher Vertreter</span>
+            </p>
+        </div>
+        <div class="right">
+            <p id="FirmTrainer">
+                <span>Datum, Unterschrift Ausbildende/r oder Auszubilder/in</span>
+            </p><br />
+            <p id="FirmPersonDepartment">
+                Sonstige Sichtvermerke:<br />
+                <br /><br />
+                <span>Datum, Unterschrift Personalabteilung</span>
+            </p><br /><br />
+            <p id="FirmSchool">
+                <span>Datum, Unterschrift Berufsschule</span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

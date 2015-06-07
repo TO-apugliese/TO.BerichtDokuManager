@@ -1,0 +1,30 @@
+﻿@model BerichtDokuManagement.Models.MonthReport
+
+@{
+    ViewBag.Title = "Bist du sicher, dass dieser Monatsbericht gelöscht werden soll?";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>MonthReport</legend>
+        <table>
+            <tr>
+                <th>Jahr</th>
+                <th>Monat</th>
+            </tr>
+            <tr>
+                <td>@Html.DisplayFor(model => model.ReportDate.Year)</td>
+                <td>@Html.DisplayFor(model => model.ReportDate.Month)</td>
+            </tr>
+        </table>
+    </fieldset>
+    <p>
+        <input type="submit" value="löschen" /> 
+        <input type="button" value="abbrechen" onclick="window.location = '/Month/AllMonths';" /> 
+    </p>
+}

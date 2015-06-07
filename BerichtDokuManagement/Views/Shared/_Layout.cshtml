@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Meine ASP.NET MVC-Anwendung</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/Site.css")
+        @Styles.Render("~/Content/jquery-ui.css")
+        @Scripts.Render("~/bundles/modernizr")
+        <link href="~/Content/responsive.css" rel="stylesheet" />
+    </head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("Logo", "Index", "Home", new { @class = "logo" })</p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                @Html.Partial("_NaviPartial")
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - TourOnline AG - Anthony Pugliese</p>
+            </div>
+        </div>
+    </footer>
+    <div id="ProfilConfigFrame" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background:rgba(141,141,141,0.8);">
+        <div class="inner" style="width: 500px; height: 100%; margin: 0 auto;">
+            <a class="icon-cross"></a>
+            <iframe style="border-radius: 5px; background: rgba(255,255,255,0.9); border: 4px solid #939393; " frameborder="0" scrolling="no" width="500" height="330" src="/Account/Config">
+            </iframe>
+        </div>
+    </div>
+    <div id="legendButton">
+        <div id="top"><<</div>
+        <div class="text">
+            Legende 
+        </div>
+        <div class="text">
+            Status
+        </div>
+        <div id="bottom"><<</div>
+    </div>
+    <div id="legende">
+        <span>Auszubildender</span>
+        <ul>
+            <li class="neu">neu</li>
+            <li class="bearbeitet">bearbeitet</li>
+        </ul>
+        <span>Teamleiter:</span>
+        <ul>
+            <li class="korrektur">korrektur</li>
+            <li class="freigabe">freigabe</li>
+        </ul>
+    </div>
+          
+            @Scripts.Render("~/bundles/jquery")
+            @RenderSection("scripts", required: false)
+            <script src="~/Scripts/jquery-ui.js"></script>
+            <script>
+                //Config Pop up
+                $('#Userprofilename').click(function () {
+                    var profileSettingsFrame;
+                    var width = $(window).width();
+                    var height = $(window).height();
+                    $('#ProfilConfigFrame, .icon-cross').fadeIn();
+                    $('#ProfilConfigFrame .inner').css('margin-top',(height- height/2 -225));
+                    $('#ProfilConfigFrame .inner').append(profileSettingsFrame);
+                });
+
+                $('#ProfilConfigFrame, .icon-cross').click(function () {
+                    $(this).fadeOut();
+                });
+
+                var islegendActive = false;
+                var speed = 500;
+                var openLength = 240;
+
+                //Legende slide
+                $('#legendButton').click(function () {
+                    $('#legendButton').animate({
+                        right: !islegendActive ? openLength : 0
+                    }, speed);
+
+                    $('#legende').animate({
+                        width: !islegendActive ? openLength : 0
+                    }, speed);
+
+                    if (!islegendActive) {
+                        $(this).find('#bottom').html(">>");
+                        $(this).find('#top').html(">>");
+                    } else {
+                        $(this).find('#bottom').html("<<");
+                        $(this).find('#top').html("<<");
+                    }
+                    
+                    islegendActive = islegendActive ? false : true;
+                });
+
+                var windowHeight = $(window).height();
+
+                $('#body').css('min-height', windowHeight * 0.75);
+                $('#loginForm').css('top','25%');
+            </script>
+</body>
+</html>

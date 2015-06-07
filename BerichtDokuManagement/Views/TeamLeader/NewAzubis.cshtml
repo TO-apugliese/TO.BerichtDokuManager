@@ -1,0 +1,47 @@
+﻿@using BerichtDokuManagement.Moduls;
+@model IEnumerable<BerichtDokuManagement.Models.Users>
+
+@{
+    ViewBag.Title = "Auszubildende ohne Teamleiter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Neue Auszubildende</h1>
+<br />
+<table>
+    @if (Model.Count() > 0)
+    {
+
+        <tr>
+            <th>
+                Vorname
+            </th>
+            <th>
+                Nachname
+            </th>
+            <th></th>
+        </tr>
+    }
+    else
+    {
+        <span>Momentan gibt es keine neu angemeldeten Auszubildende</span>
+    }
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <span>@AccountManager.getUserConfig(item.ID).FirstName</span>
+            </td>
+            <td>
+                <span>@AccountManager.getUserConfig(item.ID).LastName</span>
+            </td>
+            <td>
+                @Html.ActionLink("Als meinen Azubi markieren", "AddToMyAzubis", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+

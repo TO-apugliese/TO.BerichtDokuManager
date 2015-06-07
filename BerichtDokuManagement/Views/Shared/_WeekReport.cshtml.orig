@@ -1,0 +1,90 @@
+﻿@using BerichtDokuManagement.Models
+@model BerichtDokuManagement.Models.WeekReport
+
+
+<div class="WeekItem @ViewBag.userRole">
+    <h2>Wochenbericht @Model.TrainingWeek</h2>
+    <br />
+    <fieldset>
+        <legend>WeekReport</legend>
+        <table>
+            <tbody>
+                <tr>
+                    <th><span>Ausbildungswoche</span></th>
+                    <th><span>Von</span></th>
+                    <th><span>Bis</span></th>
+                    <th><span>Freigegeben</span></th>
+                    @if (ViewBag.userRole == Enums.userType.Teamleiter.ToString())
+                    {
+                        <th>Bearbeitet</th>
+                    }
+                </tr>
+                <tr>
+                    <td><span>@Model.TrainingWeek</span></td>
+                    <td><span id="BeginDate">@Html.DisplayFor(model => model.BeginDay)</span></td>
+                    <td><span id="EndDate">@Html.DisplayFor(model => Model.EndDay)</span></td>
+                    <td>
+                        @if (Model.hasPassing)
+                        {
+                            <span id="statusGreen"></span>
+                        }
+                        else
+                        {
+                            <span id="statusRed"></span>
+                        }
+                    </td>
+<<<<<<< HEAD
+                    @if (ViewBag.userRole == Enums.userType.Teamleiter.ToString())
+                    {
+                        <td>
+
+                            @if (Model.isProceed)
+                            {
+                                <span id="statusGreen"></span>
+                            }
+                            else
+                            {
+                                <span id="statusRed"></span>
+                            }
+
+                        </td>
+                    }
+=======
+                    @if (ViewBag.userRole == Enums.userType.Teamleiter.ToString()) {
+                    <td>
+                    
+                        @if (Model.isProceed)
+                        {
+                            <span id="statusGreen"></span>
+                        }
+                        else
+                        {
+                            <span id="statusRed"></span>
+                        }
+                    
+                    </td>
+                }
+>>>>>>> 33a195bbeda8c342ee0a2859d29718f837e98ef1
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    <p>
+        @{
+            if (ViewBag.userRole == Enums.userType.Auszubildender.ToString())
+            {
+                @Html.ActionLink("bearbeiten", "Edit", "Week", new { referent = "Month", id = Model.ID, userRole = ViewBag.userRole }, false) <span class="icon-pencil"></span><text> | </text>
+                @Html.ActionLink("löschen", "Delete", "Week", new { referent = "Month", id = Model.ID }, false)    <span class="icon-trash"></span>
+            }
+            else if (ViewBag.userRole == Enums.userType.Teamleiter.ToString())
+            {
+                @Html.ActionLink("Beurteilen", "Edit", "Week", new { referent = "Month", id = Model.ID, userRole = ViewBag.userRole }, false) <span class="icon-pencil"></span>
+            }
+        }
+    </p>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/myScripts.js"></script>
+}

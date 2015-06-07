@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
+  <Comment CommentText="Selbst erstelle Controller Filter">
+    <Position X="8.991" Y="0.641" Height="0.313" Width="2.465" />
+  </Comment>
+  <Comment CommentText="Models für die Registrierung &amp; Anmeldung">
+    <Position X="2.75" Y="0.641" Height="0.313" Width="5.449" />
+  </Comment>
+  <Comment CommentText="Enums">
+    <Position X="0.562" Y="0.641" Height="0.306" Width="1.609" />
+  </Comment>
+  <Comment CommentText="Models für das Erstellen der PDFs und der E-Mails">
+    <Position X="2.536" Y="3.586" Height="0.313" Width="5.762" />
+  </Comment>
+  <Class Name="BerichtDokuManagement.Filters.needAuthorization">
+    <Position X="9.25" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Filters\needAuthorization.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Filters.OnlyAzubi">
+    <Position X="9.25" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Filters\OnlyAzubi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Filters.OnlyTeamleader">
+    <Position X="9.25" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Filters\OnlyTeamleader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Models.LoginModel">
+    <Position X="2.75" Y="1" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAgAAA=</HashCode>
+      <FileName>Models\AccountModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Models.RegisterModel">
+    <Position X="5.5" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAQAwAAIAA=</HashCode>
+      <FileName>Models\AccountModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Filters.RefreshSession">
+    <Position X="9" Y="1" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Filters\RefreshSession.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Models.Enums">
+    <Position X="0.5" Y="1" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="BerichtDokuManagement.Models.Enums.MailType">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Enums.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="BerichtDokuManagement.Models.Enums.userType">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Enums.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="BerichtDokuManagement.Models.Enums.reportState">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Enums.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="BerichtDokuManagement.Models.Enums.Month">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Enums.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Models.Template.pdfTemplateInfo">
+    <Position X="2.5" Y="4" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>IAAEgAAQBAAAAAAAgAAAAgAgEAgACAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\Template\pdfTemplateInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BerichtDokuManagement.Models.MailInfo">
+    <Position X="6" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAASAAAAAAQA=</HashCode>
+      <FileName>Models\Template\MailTemplateInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

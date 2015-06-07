@@ -1,0 +1,61 @@
+﻿@model BerichtDokuManagement.Models.RegisterModel
+@{
+    ViewBag.Title = "Registrieren";
+    Layout = "/Views/Shared/_Layout-withoutLogin.cshtml";
+}
+
+
+<section id="RegisterFormAzubi">
+    <hgroup class="title">
+        <h1>@ViewBag.Title.</h1>
+        <h2>Neues Azubi Konto erstellen.</h2>
+    </hgroup>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        if (ViewBag.UserNotValidInfo != null)
+        {
+            <p class="info">
+                @ViewBag.UserNotValidInfo
+            </p>
+        }
+        <fieldset>
+            <legend>Registrierungsformular</legend>
+            <ol>
+                <li>
+                    @Html.DropDownList("Anrede", (IEnumerable<SelectListItem>)ViewBag.Anrede)
+                </li>
+                <li>
+                    @Html.TextBoxFor(m => m.Vorname, new { placeholder = "Vorname" })
+                </li>
+                <li>
+                    @Html.TextBoxFor(m => m.Nachname, new { placeholder = "Nachname" })
+                </li>
+                <li>
+                    @Html.TextBoxFor(m => m.UserName, new { placeholder = "Benutzername" })
+                </li>
+                <li>
+                    @Html.TextBoxFor(m => m.Mail, new { placeholder = "E-Mail Adresse" })
+                </li>
+                <li>
+                    @Html.PasswordFor(m => m.Password, new { placeholder = "Passwort" })
+                </li>
+                <li>
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Passwort bestätigung" })
+                </li>
+            </ol>
+            <input type="submit" value="Registrieren" />
+        </fieldset>
+    }
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $('#RegisterFormAzubi').fadeIn(1800);
+        });
+    </script>
+}

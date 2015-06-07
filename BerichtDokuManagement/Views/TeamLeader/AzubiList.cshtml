@@ -1,0 +1,43 @@
+﻿@using BerichtDokuManagement.Moduls;
+@model IEnumerable<BerichtDokuManagement.Models.Users>
+
+@{
+    ViewBag.Title = "Deine Auszubildenden";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Title</h1>
+<br />
+<table>
+    @if (Model.Count() > 0)
+    {
+
+        <tr>
+            <th>
+                Vorname
+            </th>
+            <th>
+                Nachname
+            </th>
+            <th></th>
+        </tr>
+    }
+    else
+    {
+        <text>Momentan hast du keine Auszubildenden</text>
+    }
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <span>@AccountManager.getUserConfig(item.ID).FirstName</span>
+        </td>
+        <td>
+            <span>@AccountManager.getUserConfig(item.ID).LastName</span>
+        <td>
+            @Html.ActionLink("Azubi Freigeben", "Approval", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>
